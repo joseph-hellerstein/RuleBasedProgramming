@@ -1,0 +1,37 @@
+# Created by BioNetGen 2.2.6-stable
+begin parameters
+    1 _rateLaw1    10  # Constant
+    2 _rateLaw2    5  # Constant
+    3 _rateLaw3    2.5  # Constant
+    4 _rateLaw4    5  # Constant
+    5 _rateLaw5    7  # Constant
+    6 _rateLaw6    5  # Constant
+    7 _rateLaw7    0.2  # Constant
+    8 _rateLaw8    3  # Constant
+end parameters
+begin species
+    1 DNA() 500
+    2 RNA() 0
+    3 Protein1(y) 0
+    4 Protein2(y) 0
+    5 Trash() 0
+    6 Protein1(y!1).Protein2(y!1) 0
+end species
+begin reactions
+    1 1 1,2 _rateLaw1 #_R1
+    2 2 2,3 _rateLaw2 #_R2
+    3 2 2,4 _rateLaw3 #_R3
+    4 2 5 _rateLaw4 #_R4
+    5 3 5 _rateLaw5 #_R5
+    6 4 5 _rateLaw6 #_R6
+    7 3,4 6 _rateLaw7 #_R7
+    8 6 5 _rateLaw5 #_R5
+    9 6 5 _rateLaw6 #_R6
+   10 6 3,4 _rateLaw8 #_reverse__R7
+end reactions
+begin groups
+    1 RNA                  2
+    2 Protein1             3,6
+    3 Protein2             4,6
+    4 ProtComplex          6
+end groups

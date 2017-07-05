@@ -1,0 +1,735 @@
+# Created by BioNetGen 2.2.6-stable
+begin parameters
+    1 _rateLaw1  1  # Constant
+    2 _rateLaw2  1  # Constant
+    3 _rateLaw3  1  # Constant
+    4 _rateLaw4  1  # Constant
+    5 _rateLaw5  5  # Constant
+    6 _rateLaw6  100  # Constant
+    7 _rateLaw7  2  # Constant
+    8 _rateLaw8  2  # Constant
+end parameters
+begin species
+    1 anti(r,r) 500
+    2 rec(a,b,b) 1000
+    3 B(c,p~U) 2000
+    4 B(c!1,p~U).rec(a,b!1,b) 0
+    5 anti(r!1,r).rec(a!1,b,b) 0
+    6 B(c,p~P) 0
+    7 B(c!1,p~P).rec(a,b!1,b) 0
+    8 B(c!1,p~U).B(c!2,p~U).rec(a,b!1,b!2) 0
+    9 B(c!1,p~P).B(c!2,p~U).rec(a,b!2,b!1) 0
+   10 B(c!1,p~U).anti(r!2,r).rec(a!2,b!1,b) 0
+   11 B(c!1,p~P).anti(r!2,r).rec(a!2,b!1,b) 0
+   12 anti(r!1,r!2).rec(a!2,b,b).rec(a!1,b,b) 0
+   13 B(c!1,p~U).anti(r!2,r!3).rec(a!3,b!1,b).rec(a!2,b,b) 0
+   14 B(c!1,p~P).B(c!2,p~P).rec(a,b!1,b!2) 0
+   15 B(c!1,p~U).B(c!2,p~U).anti(r!3,r).rec(a!3,b!1,b!2) 0
+   16 B(c!1,p~P).B(c!2,p~U).anti(r!3,r).rec(a!3,b!2,b!1) 0
+   17 B(c!1,p~P).B(c!2,p~P).anti(r!3,r).rec(a!3,b!1,b!2) 0
+   18 B(c!1,p~P).anti(r!2,r!3).rec(a!3,b!1,b).rec(a!2,b,b) 0
+   19 B(c!1,p~U).B(c!2,p~U).anti(r!3,r!4).rec(a!4,b!1,b!2).rec(a!3,b,b) 0
+   20 B(c!1,p~P).B(c!2,p~U).anti(r!3,r!4).rec(a!4,b!2,b!1).rec(a!3,b,b) 0
+   21 B(c!1,p~U).B(c!2,p~U).anti(r!3,r!4).rec(a!4,b!1,b).rec(a!3,b!2,b) 0
+   22 B(c!1,p~P).B(c!2,p~U).anti(r!3,r!4).rec(a!4,b!2,b).rec(a!3,b!1,b) 0
+   23 B(c!1,p~P).B(c!2,p~P).anti(r!3,r!4).rec(a!4,b!1,b).rec(a!3,b!2,b) 0
+   24 B(c!1,p~U).B(c!2,p~U).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!1,b!2).rec(a!4,b!3,b) 0
+   25 B(c!1,p~P).B(c!2,p~U).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!2,b!3).rec(a!4,b!1,b) 0
+   26 B(c!1,p~P).B(c!2,p~U).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!2,b!1).rec(a!4,b!3,b) 0
+   27 B(c!1,p~P).B(c!2,p~P).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!3,b!1).rec(a!4,b!2,b) 0
+   28 B(c!1,p~PP).B(c!2,p~PP).rec(a,b!2,b!1) 0
+   29 B(c!1,p~P).B(c!2,p~P).anti(r!3,r!4).rec(a!4,b!1,b!2).rec(a!3,b,b) 0
+   30 B(c!1,p~P).B(c!2,p~P).B(c!3,p~U).anti(r!4,r!5).rec(a!4,b!1,b!2).rec(a!5,b!3,b) 0
+   31 B(c!1,p~P).B(c!2,p~P).B(c!3,p~P).anti(r!4,r!5).rec(a!5,b!1,b!3).rec(a!4,b!2,b) 0
+   32 B(c!1,p~U).B(c!2,p~U).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!1,b!2).rec(a!5,b!3,b!4) 0
+   33 B(c!1,p~P).B(c!2,p~U).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!2,b!3).rec(a!5,b!4,b!1) 0
+   34 B(c!1,p~P).B(c!2,p~P).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!3,b!4).rec(a!5,b!1,b!2) 0
+   35 B(c!1,p~P).B(c!2,p~P).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!3,b!1).rec(a!5,b!4,b!2) 0
+   36 B(c!1,p~P).B(c!2,p~P).B(c!3,p~P).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!4,b!1).rec(a!5,b!2,b!3) 0
+   37 B(c!1,p~PP).rec(a,b!1,b) 0
+   38 B(c,p~PP) 0
+   39 B(c!1,p~P).B(c!2,p~P).B(c!3,p~P).B(c!4,p~P).anti(r!5,r!6).rec(a!6,b!1,b!2).rec(a!5,b!3,b!4) 0
+   40 B(c!1,p~PP).B(c!2,p~PP).anti(r!3,r).rec(a!3,b!2,b!1) 0
+   41 B(c!1,p~PP).B(c!2,p~PP).anti(r!3,r!4).rec(a!4,b!2,b!1).rec(a!3,b,b) 0
+   42 B(c!1,p~PP).B(c!2,p~PP).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!2,b!1).rec(a!4,b!3,b) 0
+   43 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~PP).anti(r!4,r!5).rec(a!5,b!3,b!2).rec(a!4,b!1,b) 0
+   44 B(c!1,p~PP).B(c!2,p~PP).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!2,b!1).rec(a!5,b!3,b!4) 0
+   45 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~PP).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!3,b!2).rec(a!5,b!4,b!1) 0
+   46 B(c!1,p~P).B(c!2,p~P).B(c!3,p~PP).B(c!4,p~PP).anti(r!5,r!6).rec(a!6,b!4,b!3).rec(a!5,b!1,b!2) 0
+   47 B(c!1,p~P).B(c!2,p~PP).rec(a,b!2,b!1) 0
+   48 B(c!1,p~PP).B(c!2,p~U).rec(a,b!2,b!1) 0
+   49 B(c!1,p~PP).anti(r!2,r).rec(a!2,b!1,b) 0
+   50 B(c!1,p~PP).B(c!2,p~U).anti(r!3,r).rec(a!3,b!2,b!1) 0
+   51 B(c!1,p~P).B(c!2,p~PP).anti(r!3,r).rec(a!3,b!1,b!2) 0
+   52 B(c!1,p~PP).anti(r!2,r!3).rec(a!3,b!1,b).rec(a!2,b,b) 0
+   53 B(c!1,p~PP).B(c!2,p~U).anti(r!3,r!4).rec(a!4,b!2,b!1).rec(a!3,b,b) 0
+   54 B(c!1,p~PP).B(c!2,p~U).anti(r!3,r!4).rec(a!4,b!2,b).rec(a!3,b!1,b) 0
+   55 B(c!1,p~P).B(c!2,p~PP).anti(r!3,r!4).rec(a!4,b!1,b!2).rec(a!3,b,b) 0
+   56 B(c!1,p~P).B(c!2,p~PP).anti(r!3,r!4).rec(a!4,b!1,b).rec(a!3,b!2,b) 0
+   57 B(c!1,p~PP).B(c!2,p~U).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!2,b!3).rec(a!4,b!1,b) 0
+   58 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!3,b!1).rec(a!4,b!2,b) 0
+   59 B(c!1,p~PP).B(c!2,p~U).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!2,b!1).rec(a!4,b!3,b) 0
+   60 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!3,b!2).rec(a!4,b!1,b) 0
+   61 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~U).anti(r!4,r!5).rec(a!4,b!1,b!2).rec(a!5,b!3,b) 0
+   62 B(c!1,p~P).B(c!2,p~P).B(c!3,p~PP).anti(r!4,r!5).rec(a!5,b!1,b!3).rec(a!4,b!2,b) 0
+   63 B(c!1,p~PP).B(c!2,p~U).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!2,b!3).rec(a!5,b!4,b!1) 0
+   64 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!3,b!4).rec(a!5,b!1,b!2) 0
+   65 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!3,b!1).rec(a!5,b!4,b!2) 0
+   66 B(c!1,p~P).B(c!2,p~P).B(c!3,p~PP).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!4,b!1).rec(a!5,b!2,b!3) 0
+   67 B(c!1,p~P).B(c!2,p~P).B(c!3,p~PP).anti(r!4,r!5).rec(a!5,b!1,b!2).rec(a!4,b!3,b) 0
+   68 B(c!1,p~P).B(c!2,p~P).B(c!3,p~PP).B(c!4,p~U).anti(r!5,r!6).rec(a!5,b!1,b!2).rec(a!6,b!4,b!3) 0
+   69 B(c!1,p~P).B(c!2,p~P).B(c!3,p~P).B(c!4,p~PP).anti(r!5,r!6).rec(a!6,b!1,b!3).rec(a!5,b!2,b!4) 0
+   70 B(c!1,p~PP).B(c!2,p~PP).B(c!3,p~PP).anti(r!4,r!5).rec(a!5,b!2,b!1).rec(a!4,b!3,b) 0
+   71 B(c!1,p~PP).B(c!2,p~PP).B(c!3,p~PP).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!2,b!1).rec(a!5,b!4,b!3) 0
+   72 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~PP).B(c!4,p~PP).anti(r!5,r!6).rec(a!6,b!3,b!2).rec(a!5,b!1,b!4) 0
+   73 B(c!1,p~PP).B(c!2,p~PP).B(c!3,p~PP).B(c!4,p~PP).anti(r!5,r!6).rec(a!6,b!2,b!1).rec(a!5,b!4,b!3) 0
+   74 B(c!1,p~PP).B(c!2,p~PP).anti(r!3,r!4).rec(a!4,b!1,b).rec(a!3,b!2,b) 0
+   75 B(c!1,p~PP).B(c!2,p~PP).B(c!3,p~U).anti(r!4,r!5).rec(a!5,b!3,b!1).rec(a!4,b!2,b) 0
+   76 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~PP).anti(r!4,r!5).rec(a!5,b!1,b!2).rec(a!4,b!3,b) 0
+   77 B(c!1,p~PP).B(c!2,p~PP).B(c!3,p~U).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!3,b!1).rec(a!5,b!4,b!2) 0
+   78 B(c!1,p~P).B(c!2,p~PP).B(c!3,p~PP).B(c!4,p~U).anti(r!5,r!6).rec(a!6,b!4,b!2).rec(a!5,b!1,b!3) 0
+   79 B(c!1,p~P).B(c!2,p~P).B(c!3,p~PP).B(c!4,p~PP).anti(r!5,r!6).rec(a!6,b!1,b!3).rec(a!5,b!2,b!4) 0
+end species
+begin reactions
+    1 2,3 4 2*_rateLaw1 #_R1
+    2 1,2 5 2*_rateLaw3 #_R2
+    3 3 6 _rateLaw7 #_R5
+    4 2,6 7 2*_rateLaw1 #_R1
+    5 3,4 8 _rateLaw1 #_R1
+    6 4,6 9 _rateLaw1 #_R1
+    7 3,5 10 2*_rateLaw1 #_R1
+    8 5,6 11 2*_rateLaw1 #_R1
+    9 4 2,3 _rateLaw2 #_reverse__R1
+   10 2,5 12 _rateLaw3 #_R2
+   11 1,4 10 2*_rateLaw3 #_R2
+   12 4,5 13 _rateLaw3 #_R2
+   13 5 1,2 _rateLaw4 #_reverse__R2
+   14 4 7 _rateLaw7 #_R5
+   15 3,7 9 _rateLaw1 #_R1
+   16 6,7 14 _rateLaw1 #_R1
+   17 3,10 15 _rateLaw1 #_R1
+   18 6,10 16 _rateLaw1 #_R1
+   19 3,11 16 _rateLaw1 #_R1
+   20 6,11 17 _rateLaw1 #_R1
+   21 3,12 13 4*_rateLaw1 #_R1
+   22 6,12 18 4*_rateLaw1 #_R1
+   23 3,13 19 _rateLaw1 #_R1
+   24 6,13 20 _rateLaw1 #_R1
+   25 3,13 21 2*_rateLaw1 #_R1
+   26 6,13 22 2*_rateLaw1 #_R1
+   27 7 2,6 _rateLaw2 #_reverse__R1
+   28 8 3,4 2*_rateLaw2 #_reverse__R1
+   29 9 3,7 _rateLaw2 #_reverse__R1
+   30 9 4,6 _rateLaw2 #_reverse__R1
+   31 10 3,5 _rateLaw2 #_reverse__R1
+   32 11 5,6 _rateLaw2 #_reverse__R1
+   33 13 3,12 _rateLaw2 #_reverse__R1
+   34 2,10 13 _rateLaw3 #_R2
+   35 2,11 18 _rateLaw3 #_R2
+   36 4,10 21 _rateLaw3 #_R2
+   37 4,11 22 _rateLaw3 #_R2
+   38 1,7 11 2*_rateLaw3 #_R2
+   39 5,7 18 _rateLaw3 #_R2
+   40 7,10 22 _rateLaw3 #_R2
+   41 7,11 23 _rateLaw3 #_R2
+   42 1,8 15 2*_rateLaw3 #_R2
+   43 5,8 19 _rateLaw3 #_R2
+   44 8,10 24 _rateLaw3 #_R2
+   45 8,11 25 _rateLaw3 #_R2
+   46 1,9 16 2*_rateLaw3 #_R2
+   47 5,9 20 _rateLaw3 #_R2
+   48 9,10 26 _rateLaw3 #_R2
+   49 9,11 27 _rateLaw3 #_R2
+   50 10 1,4 _rateLaw4 #_reverse__R2
+   51 11 1,7 _rateLaw4 #_reverse__R2
+   52 12 2,5 2*_rateLaw4 #_reverse__R2
+   53 13 4,5 _rateLaw4 #_reverse__R2
+   54 13 2,10 _rateLaw4 #_reverse__R2
+   55 9 28 _rateLaw6 #_R4
+   56 8 9 2*_rateLaw7 #_R5
+   57 9 14 _rateLaw7 #_R5
+   58 10 11 _rateLaw7 #_R5
+   59 13 18 _rateLaw7 #_R5
+   60 3,18 20 _rateLaw1 #_R1
+   61 6,18 29 _rateLaw1 #_R1
+   62 3,18 22 2*_rateLaw1 #_R1
+   63 6,18 23 2*_rateLaw1 #_R1
+   64 3,19 24 2*_rateLaw1 #_R1
+   65 6,19 25 2*_rateLaw1 #_R1
+   66 3,20 26 2*_rateLaw1 #_R1
+   67 6,20 27 2*_rateLaw1 #_R1
+   68 3,21 24 2*_rateLaw1 #_R1
+   69 6,21 26 2*_rateLaw1 #_R1
+   70 3,22 25 _rateLaw1 #_R1
+   71 6,22 27 _rateLaw1 #_R1
+   72 3,22 26 _rateLaw1 #_R1
+   73 6,22 30 _rateLaw1 #_R1
+   74 3,23 27 2*_rateLaw1 #_R1
+   75 6,23 31 2*_rateLaw1 #_R1
+   76 3,24 32 _rateLaw1 #_R1
+   77 6,24 33 _rateLaw1 #_R1
+   78 3,25 33 _rateLaw1 #_R1
+   79 6,25 34 _rateLaw1 #_R1
+   80 3,26 33 _rateLaw1 #_R1
+   81 6,26 35 _rateLaw1 #_R1
+   82 3,27 35 _rateLaw1 #_R1
+   83 6,27 36 _rateLaw1 #_R1
+   84 14 6,7 2*_rateLaw2 #_reverse__R1
+   85 15 3,10 2*_rateLaw2 #_reverse__R1
+   86 16 3,11 _rateLaw2 #_reverse__R1
+   87 16 6,10 _rateLaw2 #_reverse__R1
+   88 17 6,11 2*_rateLaw2 #_reverse__R1
+   89 18 6,12 _rateLaw2 #_reverse__R1
+   90 19 3,13 2*_rateLaw2 #_reverse__R1
+   91 20 3,18 _rateLaw2 #_reverse__R1
+   92 20 6,13 _rateLaw2 #_reverse__R1
+   93 21 3,13 2*_rateLaw2 #_reverse__R1
+   94 22 3,18 _rateLaw2 #_reverse__R1
+   95 22 6,13 _rateLaw2 #_reverse__R1
+   96 23 6,18 2*_rateLaw2 #_reverse__R1
+   97 24 3,21 2*_rateLaw2 #_reverse__R1
+   98 24 3,19 _rateLaw2 #_reverse__R1
+   99 25 3,22 2*_rateLaw2 #_reverse__R1
+  100 25 6,19 _rateLaw2 #_reverse__R1
+  101 26 3,22 _rateLaw2 #_reverse__R1
+  102 26 6,21 _rateLaw2 #_reverse__R1
+  103 26 3,20 _rateLaw2 #_reverse__R1
+  104 27 3,23 _rateLaw2 #_reverse__R1
+  105 27 6,22 _rateLaw2 #_reverse__R1
+  106 27 6,20 _rateLaw2 #_reverse__R1
+  107 28 37,38 2*_rateLaw2 #_reverse__R1
+  108 2,15 19 _rateLaw3 #_R2
+  109 2,16 20 _rateLaw3 #_R2
+  110 2,17 29 _rateLaw3 #_R2
+  111 4,15 24 _rateLaw3 #_R2
+  112 4,16 26 _rateLaw3 #_R2
+  113 4,17 30 _rateLaw3 #_R2
+  114 7,15 25 _rateLaw3 #_R2
+  115 7,16 27 _rateLaw3 #_R2
+  116 7,17 31 _rateLaw3 #_R2
+  117 8,15 32 _rateLaw3 #_R2
+  118 8,16 33 _rateLaw3 #_R2
+  119 8,17 34 _rateLaw3 #_R2
+  120 9,15 33 _rateLaw3 #_R2
+  121 9,16 35 _rateLaw3 #_R2
+  122 9,17 36 _rateLaw3 #_R2
+  123 1,14 17 2*_rateLaw3 #_R2
+  124 5,14 29 _rateLaw3 #_R2
+  125 10,14 30 _rateLaw3 #_R2
+  126 11,14 31 _rateLaw3 #_R2
+  127 14,15 34 _rateLaw3 #_R2
+  128 14,16 36 _rateLaw3 #_R2
+  129 14,17 39 _rateLaw3 #_R2
+  130 1,28 40 2*_rateLaw3 #_R2
+  131 5,28 41 _rateLaw3 #_R2
+  132 10,28 42 _rateLaw3 #_R2
+  133 11,28 43 _rateLaw3 #_R2
+  134 15,28 44 _rateLaw3 #_R2
+  135 16,28 45 _rateLaw3 #_R2
+  136 17,28 46 _rateLaw3 #_R2
+  137 15 1,8 _rateLaw4 #_reverse__R2
+  138 16 1,9 _rateLaw4 #_reverse__R2
+  139 17 1,14 _rateLaw4 #_reverse__R2
+  140 18 5,7 _rateLaw4 #_reverse__R2
+  141 18 2,11 _rateLaw4 #_reverse__R2
+  142 19 5,8 _rateLaw4 #_reverse__R2
+  143 19 2,15 _rateLaw4 #_reverse__R2
+  144 20 5,9 _rateLaw4 #_reverse__R2
+  145 20 2,16 _rateLaw4 #_reverse__R2
+  146 21 4,10 2*_rateLaw4 #_reverse__R2
+  147 22 4,11 _rateLaw4 #_reverse__R2
+  148 22 7,10 _rateLaw4 #_reverse__R2
+  149 23 7,11 2*_rateLaw4 #_reverse__R2
+  150 24 8,10 _rateLaw4 #_reverse__R2
+  151 24 4,15 _rateLaw4 #_reverse__R2
+  152 25 8,11 _rateLaw4 #_reverse__R2
+  153 25 7,15 _rateLaw4 #_reverse__R2
+  154 26 9,10 _rateLaw4 #_reverse__R2
+  155 26 4,16 _rateLaw4 #_reverse__R2
+  156 27 9,11 _rateLaw4 #_reverse__R2
+  157 27 7,16 _rateLaw4 #_reverse__R2
+  158 21 22 2*_rateLaw5 #_R3
+  159 24 25 _rateLaw5 #_R3
+  160 24 26 2*_rateLaw5 #_R3
+  161 26 27 _rateLaw5 #_R3
+  162 26 30 _rateLaw5 #_R3
+  163 16 40 _rateLaw6 #_R4
+  164 20 41 _rateLaw6 #_R4
+  165 26 42 _rateLaw6 #_R4
+  166 27 43 _rateLaw6 #_R4
+  167 15 16 2*_rateLaw7 #_R5
+  168 16 17 _rateLaw7 #_R5
+  169 19 20 2*_rateLaw7 #_R5
+  170 20 29 _rateLaw7 #_R5
+  171 21 22 2*_rateLaw7 #_R5
+  172 22 23 _rateLaw7 #_R5
+  173 24 26 2*_rateLaw7 #_R5
+  174 24 25 _rateLaw7 #_R5
+  175 25 27 2*_rateLaw7 #_R5
+  176 26 30 _rateLaw7 #_R5
+  177 26 27 _rateLaw7 #_R5
+  178 27 31 _rateLaw7 #_R5
+  179 28 47 2*_rateLaw8 #_R6
+  180 2,38 37 2*_rateLaw1 #_R1
+  181 4,38 48 _rateLaw1 #_R1
+  182 5,38 49 2*_rateLaw1 #_R1
+  183 7,38 47 _rateLaw1 #_R1
+  184 10,38 50 _rateLaw1 #_R1
+  185 11,38 51 _rateLaw1 #_R1
+  186 12,38 52 4*_rateLaw1 #_R1
+  187 13,38 53 _rateLaw1 #_R1
+  188 13,38 54 2*_rateLaw1 #_R1
+  189 18,38 55 _rateLaw1 #_R1
+  190 18,38 56 2*_rateLaw1 #_R1
+  191 19,38 57 2*_rateLaw1 #_R1
+  192 20,38 58 2*_rateLaw1 #_R1
+  193 21,38 59 2*_rateLaw1 #_R1
+  194 22,38 60 _rateLaw1 #_R1
+  195 22,38 61 _rateLaw1 #_R1
+  196 23,38 62 2*_rateLaw1 #_R1
+  197 24,38 63 _rateLaw1 #_R1
+  198 25,38 64 _rateLaw1 #_R1
+  199 26,38 65 _rateLaw1 #_R1
+  200 27,38 66 _rateLaw1 #_R1
+  201 3,29 30 2*_rateLaw1 #_R1
+  202 6,29 31 2*_rateLaw1 #_R1
+  203 29,38 67 2*_rateLaw1 #_R1
+  204 3,30 34 _rateLaw1 #_R1
+  205 6,30 36 _rateLaw1 #_R1
+  206 30,38 68 _rateLaw1 #_R1
+  207 3,31 36 _rateLaw1 #_R1
+  208 6,31 39 _rateLaw1 #_R1
+  209 31,38 69 _rateLaw1 #_R1
+  210 3,37 48 _rateLaw1 #_R1
+  211 6,37 47 _rateLaw1 #_R1
+  212 37,38 28 _rateLaw1 #_R1
+  213 3,41 42 2*_rateLaw1 #_R1
+  214 6,41 43 2*_rateLaw1 #_R1
+  215 38,41 70 2*_rateLaw1 #_R1
+  216 3,42 44 _rateLaw1 #_R1
+  217 6,42 45 _rateLaw1 #_R1
+  218 38,42 71 _rateLaw1 #_R1
+  219 3,43 45 _rateLaw1 #_R1
+  220 6,43 46 _rateLaw1 #_R1
+  221 38,43 72 _rateLaw1 #_R1
+  222 29 6,18 2*_rateLaw2 #_reverse__R1
+  223 30 6,22 2*_rateLaw2 #_reverse__R1
+  224 30 3,29 _rateLaw2 #_reverse__R1
+  225 31 6,23 2*_rateLaw2 #_reverse__R1
+  226 31 6,29 _rateLaw2 #_reverse__R1
+  227 32 3,24 4*_rateLaw2 #_reverse__R1
+  228 33 3,26 2*_rateLaw2 #_reverse__R1
+  229 33 3,25 _rateLaw2 #_reverse__R1
+  230 33 6,24 _rateLaw2 #_reverse__R1
+  231 34 3,30 2*_rateLaw2 #_reverse__R1
+  232 34 6,25 2*_rateLaw2 #_reverse__R1
+  233 35 3,27 2*_rateLaw2 #_reverse__R1
+  234 35 6,26 2*_rateLaw2 #_reverse__R1
+  235 36 3,31 _rateLaw2 #_reverse__R1
+  236 36 6,30 _rateLaw2 #_reverse__R1
+  237 36 6,27 2*_rateLaw2 #_reverse__R1
+  238 37 2,38 _rateLaw2 #_reverse__R1
+  239 39 6,31 4*_rateLaw2 #_reverse__R1
+  240 40 38,49 2*_rateLaw2 #_reverse__R1
+  241 41 38,52 2*_rateLaw2 #_reverse__R1
+  242 42 38,54 2*_rateLaw2 #_reverse__R1
+  243 42 3,41 _rateLaw2 #_reverse__R1
+  244 43 38,56 2*_rateLaw2 #_reverse__R1
+  245 43 6,41 _rateLaw2 #_reverse__R1
+  246 44 38,57 2*_rateLaw2 #_reverse__R1
+  247 44 3,42 2*_rateLaw2 #_reverse__R1
+  248 45 38,58 2*_rateLaw2 #_reverse__R1
+  249 45 3,43 _rateLaw2 #_reverse__R1
+  250 45 6,42 _rateLaw2 #_reverse__R1
+  251 46 38,67 2*_rateLaw2 #_reverse__R1
+  252 46 6,43 2*_rateLaw2 #_reverse__R1
+  253 47 7,38 _rateLaw2 #_reverse__R1
+  254 47 6,37 _rateLaw2 #_reverse__R1
+  255 2,40 41 _rateLaw3 #_R2
+  256 4,40 42 _rateLaw3 #_R2
+  257 7,40 43 _rateLaw3 #_R2
+  258 8,40 44 _rateLaw3 #_R2
+  259 9,40 45 _rateLaw3 #_R2
+  260 14,40 46 _rateLaw3 #_R2
+  261 28,40 73 _rateLaw3 #_R2
+  262 1,37 49 2*_rateLaw3 #_R2
+  263 5,37 52 _rateLaw3 #_R2
+  264 10,37 54 _rateLaw3 #_R2
+  265 11,37 56 _rateLaw3 #_R2
+  266 15,37 57 _rateLaw3 #_R2
+  267 16,37 58 _rateLaw3 #_R2
+  268 17,37 67 _rateLaw3 #_R2
+  269 37,40 70 _rateLaw3 #_R2
+  270 1,47 51 2*_rateLaw3 #_R2
+  271 5,47 55 _rateLaw3 #_R2
+  272 10,47 61 _rateLaw3 #_R2
+  273 11,47 62 _rateLaw3 #_R2
+  274 15,47 64 _rateLaw3 #_R2
+  275 16,47 66 _rateLaw3 #_R2
+  276 17,47 69 _rateLaw3 #_R2
+  277 40,47 72 _rateLaw3 #_R2
+  278 29 5,14 _rateLaw4 #_reverse__R2
+  279 29 2,17 _rateLaw4 #_reverse__R2
+  280 30 10,14 _rateLaw4 #_reverse__R2
+  281 30 4,17 _rateLaw4 #_reverse__R2
+  282 31 11,14 _rateLaw4 #_reverse__R2
+  283 31 7,17 _rateLaw4 #_reverse__R2
+  284 32 8,15 2*_rateLaw4 #_reverse__R2
+  285 33 8,16 _rateLaw4 #_reverse__R2
+  286 33 9,15 _rateLaw4 #_reverse__R2
+  287 34 8,17 _rateLaw4 #_reverse__R2
+  288 34 14,15 _rateLaw4 #_reverse__R2
+  289 35 9,16 2*_rateLaw4 #_reverse__R2
+  290 36 9,17 _rateLaw4 #_reverse__R2
+  291 36 14,16 _rateLaw4 #_reverse__R2
+  292 39 14,17 2*_rateLaw4 #_reverse__R2
+  293 40 1,28 _rateLaw4 #_reverse__R2
+  294 41 5,28 _rateLaw4 #_reverse__R2
+  295 41 2,40 _rateLaw4 #_reverse__R2
+  296 42 10,28 _rateLaw4 #_reverse__R2
+  297 42 4,40 _rateLaw4 #_reverse__R2
+  298 43 11,28 _rateLaw4 #_reverse__R2
+  299 43 7,40 _rateLaw4 #_reverse__R2
+  300 44 15,28 _rateLaw4 #_reverse__R2
+  301 44 8,40 _rateLaw4 #_reverse__R2
+  302 45 16,28 _rateLaw4 #_reverse__R2
+  303 45 9,40 _rateLaw4 #_reverse__R2
+  304 46 17,28 _rateLaw4 #_reverse__R2
+  305 46 14,40 _rateLaw4 #_reverse__R2
+  306 32 33 4*_rateLaw5 #_R3
+  307 33 34 _rateLaw5 #_R3
+  308 33 35 2*_rateLaw5 #_R3
+  309 35 36 2*_rateLaw5 #_R3
+  310 33 44 _rateLaw6 #_R4
+  311 35 45 2*_rateLaw6 #_R4
+  312 36 46 _rateLaw6 #_R4
+  313 45 73 _rateLaw6 #_R4
+  314 30 31 _rateLaw7 #_R5
+  315 32 33 4*_rateLaw7 #_R5
+  316 33 35 2*_rateLaw7 #_R5
+  317 33 34 _rateLaw7 #_R5
+  318 34 36 2*_rateLaw7 #_R5
+  319 35 36 2*_rateLaw7 #_R5
+  320 36 39 _rateLaw7 #_R5
+  321 42 43 _rateLaw7 #_R5
+  322 44 45 2*_rateLaw7 #_R5
+  323 45 46 _rateLaw7 #_R5
+  324 37 7 _rateLaw8 #_R6
+  325 38 6 _rateLaw8 #_R6
+  326 40 51 2*_rateLaw8 #_R6
+  327 41 55 2*_rateLaw8 #_R6
+  328 42 61 2*_rateLaw8 #_R6
+  329 43 62 2*_rateLaw8 #_R6
+  330 44 64 2*_rateLaw8 #_R6
+  331 45 66 2*_rateLaw8 #_R6
+  332 46 69 2*_rateLaw8 #_R6
+  333 47 14 _rateLaw8 #_R6
+  334 3,49 50 _rateLaw1 #_R1
+  335 6,49 51 _rateLaw1 #_R1
+  336 38,49 40 _rateLaw1 #_R1
+  337 3,52 53 _rateLaw1 #_R1
+  338 6,52 55 _rateLaw1 #_R1
+  339 38,52 41 _rateLaw1 #_R1
+  340 3,52 54 2*_rateLaw1 #_R1
+  341 6,52 56 2*_rateLaw1 #_R1
+  342 38,52 74 2*_rateLaw1 #_R1
+  343 3,53 59 2*_rateLaw1 #_R1
+  344 6,53 60 2*_rateLaw1 #_R1
+  345 38,53 75 2*_rateLaw1 #_R1
+  346 3,54 57 _rateLaw1 #_R1
+  347 6,54 58 _rateLaw1 #_R1
+  348 38,54 75 _rateLaw1 #_R1
+  349 3,54 59 _rateLaw1 #_R1
+  350 6,54 61 _rateLaw1 #_R1
+  351 38,54 42 _rateLaw1 #_R1
+  352 3,55 61 2*_rateLaw1 #_R1
+  353 6,55 62 2*_rateLaw1 #_R1
+  354 38,55 76 2*_rateLaw1 #_R1
+  355 3,56 58 _rateLaw1 #_R1
+  356 6,56 67 _rateLaw1 #_R1
+  357 38,56 76 _rateLaw1 #_R1
+  358 3,56 60 _rateLaw1 #_R1
+  359 6,56 62 _rateLaw1 #_R1
+  360 38,56 43 _rateLaw1 #_R1
+  361 3,57 63 _rateLaw1 #_R1
+  362 6,57 64 _rateLaw1 #_R1
+  363 38,57 44 _rateLaw1 #_R1
+  364 3,58 65 _rateLaw1 #_R1
+  365 6,58 66 _rateLaw1 #_R1
+  366 38,58 45 _rateLaw1 #_R1
+  367 3,59 63 _rateLaw1 #_R1
+  368 6,59 65 _rateLaw1 #_R1
+  369 38,59 77 _rateLaw1 #_R1
+  370 3,60 65 _rateLaw1 #_R1
+  371 6,60 68 _rateLaw1 #_R1
+  372 38,60 78 _rateLaw1 #_R1
+  373 3,61 64 _rateLaw1 #_R1
+  374 6,61 66 _rateLaw1 #_R1
+  375 38,61 78 _rateLaw1 #_R1
+  376 3,62 66 _rateLaw1 #_R1
+  377 6,62 69 _rateLaw1 #_R1
+  378 38,62 79 _rateLaw1 #_R1
+  379 3,67 68 _rateLaw1 #_R1
+  380 6,67 69 _rateLaw1 #_R1
+  381 38,67 46 _rateLaw1 #_R1
+  382 3,70 71 _rateLaw1 #_R1
+  383 6,70 72 _rateLaw1 #_R1
+  384 38,70 73 _rateLaw1 #_R1
+  385 48 3,37 _rateLaw2 #_reverse__R1
+  386 48 4,38 _rateLaw2 #_reverse__R1
+  387 49 5,38 _rateLaw2 #_reverse__R1
+  388 50 3,49 _rateLaw2 #_reverse__R1
+  389 50 10,38 _rateLaw2 #_reverse__R1
+  390 51 6,49 _rateLaw2 #_reverse__R1
+  391 51 11,38 _rateLaw2 #_reverse__R1
+  392 52 12,38 _rateLaw2 #_reverse__R1
+  393 53 3,52 _rateLaw2 #_reverse__R1
+  394 53 13,38 _rateLaw2 #_reverse__R1
+  395 54 3,52 _rateLaw2 #_reverse__R1
+  396 54 13,38 _rateLaw2 #_reverse__R1
+  397 55 6,52 _rateLaw2 #_reverse__R1
+  398 55 18,38 _rateLaw2 #_reverse__R1
+  399 56 6,52 _rateLaw2 #_reverse__R1
+  400 56 18,38 _rateLaw2 #_reverse__R1
+  401 57 3,54 2*_rateLaw2 #_reverse__R1
+  402 57 19,38 _rateLaw2 #_reverse__R1
+  403 58 3,56 _rateLaw2 #_reverse__R1
+  404 58 6,54 _rateLaw2 #_reverse__R1
+  405 58 20,38 _rateLaw2 #_reverse__R1
+  406 59 3,54 _rateLaw2 #_reverse__R1
+  407 59 21,38 _rateLaw2 #_reverse__R1
+  408 59 3,53 _rateLaw2 #_reverse__R1
+  409 60 3,56 _rateLaw2 #_reverse__R1
+  410 60 22,38 _rateLaw2 #_reverse__R1
+  411 60 6,53 _rateLaw2 #_reverse__R1
+  412 61 6,54 _rateLaw2 #_reverse__R1
+  413 61 22,38 _rateLaw2 #_reverse__R1
+  414 61 3,55 _rateLaw2 #_reverse__R1
+  415 62 6,56 _rateLaw2 #_reverse__R1
+  416 62 23,38 _rateLaw2 #_reverse__R1
+  417 62 6,55 _rateLaw2 #_reverse__R1
+  418 63 3,59 2*_rateLaw2 #_reverse__R1
+  419 63 3,57 _rateLaw2 #_reverse__R1
+  420 63 24,38 _rateLaw2 #_reverse__R1
+  421 64 3,61 2*_rateLaw2 #_reverse__R1
+  422 64 6,57 _rateLaw2 #_reverse__R1
+  423 64 25,38 _rateLaw2 #_reverse__R1
+  424 65 3,60 _rateLaw2 #_reverse__R1
+  425 65 6,59 _rateLaw2 #_reverse__R1
+  426 65 3,58 _rateLaw2 #_reverse__R1
+  427 65 26,38 _rateLaw2 #_reverse__R1
+  428 66 3,62 _rateLaw2 #_reverse__R1
+  429 66 6,61 _rateLaw2 #_reverse__R1
+  430 66 6,58 _rateLaw2 #_reverse__R1
+  431 66 27,38 _rateLaw2 #_reverse__R1
+  432 67 6,56 2*_rateLaw2 #_reverse__R1
+  433 67 29,38 _rateLaw2 #_reverse__R1
+  434 68 6,60 2*_rateLaw2 #_reverse__R1
+  435 68 3,67 _rateLaw2 #_reverse__R1
+  436 68 30,38 _rateLaw2 #_reverse__R1
+  437 69 6,62 2*_rateLaw2 #_reverse__R1
+  438 69 6,67 _rateLaw2 #_reverse__R1
+  439 69 31,38 _rateLaw2 #_reverse__R1
+  440 70 38,74 2*_rateLaw2 #_reverse__R1
+  441 70 38,41 _rateLaw2 #_reverse__R1
+  442 71 38,75 2*_rateLaw2 #_reverse__R1
+  443 71 3,70 _rateLaw2 #_reverse__R1
+  444 71 38,42 _rateLaw2 #_reverse__R1
+  445 72 38,76 2*_rateLaw2 #_reverse__R1
+  446 72 6,70 _rateLaw2 #_reverse__R1
+  447 72 38,43 _rateLaw2 #_reverse__R1
+  448 73 38,70 4*_rateLaw2 #_reverse__R1
+  449 2,49 52 _rateLaw3 #_R2
+  450 2,50 53 _rateLaw3 #_R2
+  451 2,51 55 _rateLaw3 #_R2
+  452 4,49 54 _rateLaw3 #_R2
+  453 4,50 59 _rateLaw3 #_R2
+  454 4,51 61 _rateLaw3 #_R2
+  455 7,49 56 _rateLaw3 #_R2
+  456 7,50 60 _rateLaw3 #_R2
+  457 7,51 62 _rateLaw3 #_R2
+  458 8,49 57 _rateLaw3 #_R2
+  459 8,50 63 _rateLaw3 #_R2
+  460 8,51 64 _rateLaw3 #_R2
+  461 9,49 58 _rateLaw3 #_R2
+  462 9,50 65 _rateLaw3 #_R2
+  463 9,51 66 _rateLaw3 #_R2
+  464 14,49 67 _rateLaw3 #_R2
+  465 14,50 68 _rateLaw3 #_R2
+  466 14,51 69 _rateLaw3 #_R2
+  467 28,49 70 _rateLaw3 #_R2
+  468 28,50 71 _rateLaw3 #_R2
+  469 28,51 72 _rateLaw3 #_R2
+  470 37,49 74 _rateLaw3 #_R2
+  471 37,50 75 _rateLaw3 #_R2
+  472 37,51 76 _rateLaw3 #_R2
+  473 47,49 76 _rateLaw3 #_R2
+  474 47,50 78 _rateLaw3 #_R2
+  475 47,51 79 _rateLaw3 #_R2
+  476 1,48 50 2*_rateLaw3 #_R2
+  477 5,48 53 _rateLaw3 #_R2
+  478 10,48 59 _rateLaw3 #_R2
+  479 11,48 60 _rateLaw3 #_R2
+  480 15,48 63 _rateLaw3 #_R2
+  481 16,48 65 _rateLaw3 #_R2
+  482 17,48 68 _rateLaw3 #_R2
+  483 40,48 71 _rateLaw3 #_R2
+  484 48,49 75 _rateLaw3 #_R2
+  485 48,50 77 _rateLaw3 #_R2
+  486 48,51 78 _rateLaw3 #_R2
+  487 49 1,37 _rateLaw4 #_reverse__R2
+  488 50 1,48 _rateLaw4 #_reverse__R2
+  489 51 1,47 _rateLaw4 #_reverse__R2
+  490 52 5,37 _rateLaw4 #_reverse__R2
+  491 52 2,49 _rateLaw4 #_reverse__R2
+  492 53 5,48 _rateLaw4 #_reverse__R2
+  493 53 2,50 _rateLaw4 #_reverse__R2
+  494 54 4,49 _rateLaw4 #_reverse__R2
+  495 54 10,37 _rateLaw4 #_reverse__R2
+  496 55 5,47 _rateLaw4 #_reverse__R2
+  497 55 2,51 _rateLaw4 #_reverse__R2
+  498 56 7,49 _rateLaw4 #_reverse__R2
+  499 56 11,37 _rateLaw4 #_reverse__R2
+  500 57 8,49 _rateLaw4 #_reverse__R2
+  501 57 15,37 _rateLaw4 #_reverse__R2
+  502 58 9,49 _rateLaw4 #_reverse__R2
+  503 58 16,37 _rateLaw4 #_reverse__R2
+  504 59 10,48 _rateLaw4 #_reverse__R2
+  505 59 4,50 _rateLaw4 #_reverse__R2
+  506 60 11,48 _rateLaw4 #_reverse__R2
+  507 60 7,50 _rateLaw4 #_reverse__R2
+  508 61 10,47 _rateLaw4 #_reverse__R2
+  509 61 4,51 _rateLaw4 #_reverse__R2
+  510 62 11,47 _rateLaw4 #_reverse__R2
+  511 62 7,51 _rateLaw4 #_reverse__R2
+  512 63 8,50 _rateLaw4 #_reverse__R2
+  513 63 15,48 _rateLaw4 #_reverse__R2
+  514 64 8,51 _rateLaw4 #_reverse__R2
+  515 64 15,47 _rateLaw4 #_reverse__R2
+  516 65 9,50 _rateLaw4 #_reverse__R2
+  517 65 16,48 _rateLaw4 #_reverse__R2
+  518 66 9,51 _rateLaw4 #_reverse__R2
+  519 66 16,47 _rateLaw4 #_reverse__R2
+  520 67 14,49 _rateLaw4 #_reverse__R2
+  521 67 17,37 _rateLaw4 #_reverse__R2
+  522 68 14,50 _rateLaw4 #_reverse__R2
+  523 68 17,48 _rateLaw4 #_reverse__R2
+  524 69 14,51 _rateLaw4 #_reverse__R2
+  525 69 17,47 _rateLaw4 #_reverse__R2
+  526 70 28,49 _rateLaw4 #_reverse__R2
+  527 70 37,40 _rateLaw4 #_reverse__R2
+  528 71 28,50 _rateLaw4 #_reverse__R2
+  529 71 40,48 _rateLaw4 #_reverse__R2
+  530 72 28,51 _rateLaw4 #_reverse__R2
+  531 72 40,47 _rateLaw4 #_reverse__R2
+  532 73 28,40 2*_rateLaw4 #_reverse__R2
+  533 59 60 _rateLaw5 #_R3
+  534 59 61 _rateLaw5 #_R3
+  535 63 64 _rateLaw5 #_R3
+  536 63 65 2*_rateLaw5 #_R3
+  537 65 66 _rateLaw5 #_R3
+  538 65 68 _rateLaw5 #_R3
+  539 58 70 _rateLaw6 #_R4
+  540 65 71 _rateLaw6 #_R4
+  541 66 72 _rateLaw6 #_R4
+  542 48 47 _rateLaw7 #_R5
+  543 50 51 _rateLaw7 #_R5
+  544 53 55 _rateLaw7 #_R5
+  545 54 56 _rateLaw7 #_R5
+  546 57 58 2*_rateLaw7 #_R5
+  547 58 67 _rateLaw7 #_R5
+  548 59 61 _rateLaw7 #_R5
+  549 59 60 _rateLaw7 #_R5
+  550 60 62 _rateLaw7 #_R5
+  551 61 62 _rateLaw7 #_R5
+  552 63 65 2*_rateLaw7 #_R5
+  553 63 64 _rateLaw7 #_R5
+  554 64 66 2*_rateLaw7 #_R5
+  555 65 68 _rateLaw7 #_R5
+  556 65 66 _rateLaw7 #_R5
+  557 66 69 _rateLaw7 #_R5
+  558 68 69 _rateLaw7 #_R5
+  559 71 72 _rateLaw7 #_R5
+  560 48 9 _rateLaw8 #_R6
+  561 49 11 _rateLaw8 #_R6
+  562 50 16 _rateLaw8 #_R6
+  563 51 17 _rateLaw8 #_R6
+  564 52 18 _rateLaw8 #_R6
+  565 53 20 _rateLaw8 #_R6
+  566 54 22 _rateLaw8 #_R6
+  567 55 29 _rateLaw8 #_R6
+  568 56 23 _rateLaw8 #_R6
+  569 57 25 _rateLaw8 #_R6
+  570 58 27 _rateLaw8 #_R6
+  571 59 26 _rateLaw8 #_R6
+  572 60 27 _rateLaw8 #_R6
+  573 61 30 _rateLaw8 #_R6
+  574 62 31 _rateLaw8 #_R6
+  575 63 33 _rateLaw8 #_R6
+  576 64 34 _rateLaw8 #_R6
+  577 65 35 _rateLaw8 #_R6
+  578 66 36 _rateLaw8 #_R6
+  579 67 31 _rateLaw8 #_R6
+  580 68 36 _rateLaw8 #_R6
+  581 69 39 _rateLaw8 #_R6
+  582 70 76 2*_rateLaw8 #_R6
+  583 70 43 _rateLaw8 #_R6
+  584 71 78 2*_rateLaw8 #_R6
+  585 71 45 _rateLaw8 #_R6
+  586 72 79 2*_rateLaw8 #_R6
+  587 72 46 _rateLaw8 #_R6
+  588 73 72 4*_rateLaw8 #_R6
+  589 3,74 75 2*_rateLaw1 #_R1
+  590 6,74 76 2*_rateLaw1 #_R1
+  591 38,74 70 2*_rateLaw1 #_R1
+  592 3,75 77 _rateLaw1 #_R1
+  593 6,75 78 _rateLaw1 #_R1
+  594 38,75 71 _rateLaw1 #_R1
+  595 3,76 78 _rateLaw1 #_R1
+  596 6,76 79 _rateLaw1 #_R1
+  597 38,76 72 _rateLaw1 #_R1
+  598 74 38,52 2*_rateLaw2 #_reverse__R1
+  599 75 3,74 _rateLaw2 #_reverse__R1
+  600 75 38,54 _rateLaw2 #_reverse__R1
+  601 75 38,53 _rateLaw2 #_reverse__R1
+  602 76 6,74 _rateLaw2 #_reverse__R1
+  603 76 38,56 _rateLaw2 #_reverse__R1
+  604 76 38,55 _rateLaw2 #_reverse__R1
+  605 77 3,75 2*_rateLaw2 #_reverse__R1
+  606 77 38,59 2*_rateLaw2 #_reverse__R1
+  607 78 3,76 _rateLaw2 #_reverse__R1
+  608 78 38,61 _rateLaw2 #_reverse__R1
+  609 78 6,75 _rateLaw2 #_reverse__R1
+  610 78 38,60 _rateLaw2 #_reverse__R1
+  611 79 6,76 2*_rateLaw2 #_reverse__R1
+  612 79 38,62 2*_rateLaw2 #_reverse__R1
+  613 74 37,49 2*_rateLaw4 #_reverse__R2
+  614 75 48,49 _rateLaw4 #_reverse__R2
+  615 75 37,50 _rateLaw4 #_reverse__R2
+  616 76 47,49 _rateLaw4 #_reverse__R2
+  617 76 37,51 _rateLaw4 #_reverse__R2
+  618 77 48,50 2*_rateLaw4 #_reverse__R2
+  619 78 48,51 _rateLaw4 #_reverse__R2
+  620 78 47,50 _rateLaw4 #_reverse__R2
+  621 79 47,51 2*_rateLaw4 #_reverse__R2
+  622 77 78 2*_rateLaw5 #_R3
+  623 75 76 _rateLaw7 #_R5
+  624 77 78 2*_rateLaw7 #_R5
+  625 78 79 _rateLaw7 #_R5
+  626 74 56 2*_rateLaw8 #_R6
+  627 75 58 _rateLaw8 #_R6
+  628 75 60 _rateLaw8 #_R6
+  629 76 67 _rateLaw8 #_R6
+  630 76 62 _rateLaw8 #_R6
+  631 77 65 2*_rateLaw8 #_R6
+  632 78 66 _rateLaw8 #_R6
+  633 78 68 _rateLaw8 #_R6
+  634 79 69 2*_rateLaw8 #_R6
+end reactions
+begin groups
+    1 Bphos                6,7,9,11,2*14,16,2*17,18,20,22,2*23,25,26,2*27,2*29,2*30,3*31,33,2*34,2*35,3*36,4*39,43,45,2*46,47,51,55,56,58,60,61,2*62,64,65,2*66,2*67,2*68,3*69,72,76,78,2*79
+    2 BphosP               2*28,37,38,2*40,2*41,2*42,2*43,2*44,2*45,2*46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,3*70,3*71,3*72,4*73,2*74,2*75,2*76,2*77,2*78,2*79
+    3 B_rec                4,7,2*8,2*9,10,11,13,2*14,2*15,2*16,2*17,18,2*19,2*20,2*21,2*22,2*23,3*24,3*25,3*26,3*27,2*28,2*29,3*30,3*31,4*32,4*33,4*34,4*35,4*36,37,4*39,2*40,2*41,3*42,3*43,4*44,4*45,4*46,2*47,2*48,49,2*50,2*51,52,2*53,2*54,2*55,2*56,3*57,3*58,3*59,3*60,3*61,3*62,4*63,4*64,4*65,4*66,3*67,4*68,4*69,3*70,4*71,4*72,4*73,2*74,3*75,3*76,4*77,4*78,4*79
+    4 anti_rec             5,10,11,2*12,2*13,15,16,17,2*18,2*19,2*20,2*21,2*22,2*23,2*24,2*25,2*26,2*27,2*29,2*30,2*31,2*32,2*33,2*34,2*35,2*36,2*39,40,2*41,2*42,2*43,2*44,2*45,2*46,49,50,51,2*52,2*53,2*54,2*55,2*56,2*57,2*58,2*59,2*60,2*61,2*62,2*63,2*64,2*65,2*66,2*67,2*68,2*69,2*70,2*71,2*72,2*73,2*74,2*75,2*76,2*77,2*78,2*79
+    5 full                 2*21,2*22,2*23,4*24,4*25,4*26,4*27,4*30,4*31,8*32,8*33,8*34,8*35,8*36,8*39,4*42,4*43,8*44,8*45,8*46,2*54,2*56,4*57,4*58,4*59,4*60,4*61,4*62,8*63,8*64,8*65,8*66,4*67,8*68,8*69,4*70,8*71,8*72,8*73,2*74,4*75,4*76,8*77,8*78,8*79
+end groups

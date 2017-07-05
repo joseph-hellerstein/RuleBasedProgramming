@@ -1,0 +1,35 @@
+###
+#@notes:'This is an atomized translation of an SBML model created on 06/06/2017. The original model has 3 molecules and 2 reactions. The translated model has 2 molecules and 2 rules'
+###
+begin model
+begin parameters
+	k1 16000.0
+	k2 0.7
+end parameters
+begin compartments
+	#volume units: L
+	compartment 2 1.0
+	cell 3 1.0
+end compartments
+begin molecule types
+	S2(s1,s1)
+	S1(s2)
+end molecule types
+begin seed species
+	@compartment:S1(s2) 0.0001 #S1 #S1
+	@compartment:S2(s1,s1) 5e-05 #S2 #S2
+	@compartment:S2(s1!0,s1!1).S1(s2!0).S1(s2!1) 0.0001 #S3 #S3
+end seed species
+begin observables
+	Species S1_compartment @compartment:S1(s2) #S1
+	Species S2_compartment @compartment:S2(s1,s1) #S2
+	Species S3_compartment @compartment:S2(s1!0,s1!1).S1(s2!0).S1(s2!1) #S3
+end observables
+begin functions
+	functionRate0() = if(S1_compartment>0,k1*((S1_compartment) ^ (2))/(S1_compartment^2),0)*2
+end functions
+begin reaction rules
+	reaction1: S1(s2)@compartment + S1(s2)@compartment + S2(s1,s1)@compartment -> S2(s1!0,s1!1)@compartment.S1(s2!0)@compartment.S1(s2!1)@compartment functionRate0()
+	reaction2: S2(s1!0,s1!1)@compartment.S1(s2!0)@compartment.S1(s2!1)@compartment -> S1(s2)@compartment + S1(s2)@compartment + S2(s1,s1)@compartment k2
+end reaction rules
+end model

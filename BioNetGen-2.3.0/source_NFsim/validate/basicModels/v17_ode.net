@@ -1,0 +1,21 @@
+# Created by BioNetGen 2.2.6-stable
+begin parameters
+    1 _ProblemRule_local1  if((3>1),1.0,0.0)  # Constant
+    2 _ProblemRule_local2  if((2>1),1.0,0.0)  # Constant
+end parameters
+begin species
+    1 L(s!1,s!2).L(s!3,s!4).R(s!1,s!3).R(s!2,s).R(s!4,s) 1
+    2 L(s!1,s!2).L(s!3,s).R(s!3,s!1).R(s!2,s) 0
+    3 R(s,s) 0
+    4 L(s!1,s).L(s!2,s).R(s!2,s!1) 0
+end species
+begin reactions
+    1 1 2,3 2*_ProblemRule_local1 #ProblemRule
+    2 2 3,4 _ProblemRule_local2 #ProblemRule
+end reactions
+begin groups
+    1 Rpattern             2*1
+    2 FreeR                2*3
+    3 Rsimple              2,2*4
+    4 Rtot                 3*1,2*2,3,4
+end groups

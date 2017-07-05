@@ -1,0 +1,29 @@
+###
+#@notes:'This is an atomized translation of an SBML model created on 06/06/2017. The original model has 2 molecules and 1 reactions. The translated model has 1 molecules and 1 rules'
+###
+begin model
+begin parameters
+	k1 1.0
+end parameters
+begin compartments
+	#volume units: L
+	C 3 1.0
+	cell 3 1.0
+end compartments
+begin molecule types
+	S2(s2)
+end molecule types
+begin seed species
+	@C:S2(s2!0).S2(s2!0) 0.15 #S1 #S1
+end seed species
+begin observables
+	Species S1_C @C:S2(s2!0).S2(s2!0) #S1
+	Species S2_C @C:S2(s2) #S2
+end observables
+begin functions
+	functionRate0() = k1 * time()
+end functions
+begin reaction rules
+	reaction1: S2(s2!0)@C.S2(s2!0)@C -> S2(s2)@C + S2(s2)@C functionRate0()
+end reaction rules
+end model

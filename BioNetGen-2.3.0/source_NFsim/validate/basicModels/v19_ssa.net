@@ -1,0 +1,26 @@
+# Created by BioNetGen 2.2.6-stable
+begin parameters
+    1 kmod         1  # Constant
+    2 __R1_local1  if((2>0),1,0)*kmod  # ConstantExpression
+    3 __R2_local1  if((2>0),1,0)*kmod  # ConstantExpression
+end parameters
+begin species
+    1 X(a!1,a!2).Y(b!1,c,d~0).Y(b!2,c,d~0) 100
+    2 A(a!1,a!2).B(b!1,c,d~0).B(b!2,c,d~0) 100
+    3 X(a!1,a!2).Y(b!2,c,d~0).Y(b!1,c,d~1) 0
+    4 A(a!1,a!2).B(b!2,c,d~0).B(b!1,c,d~1) 0
+    5 X(a!1,a!2).Y(b!2,c,d~1).Y(b!1,c,d~1) 0
+    6 A(a!1,a!2).B(b!2,c,d~1).B(b!1,c,d~1) 0
+end species
+begin reactions
+    1 1 3 2*__R1_local1 #_R1
+    2 2 4 2*__R2_local1 #_R2
+    3 3 5 __R1_local1 #_R1
+    4 4 6 __R2_local1 #_R2
+end reactions
+begin groups
+    1 Ytot                 2*1,2*3,2*5
+    2 Yzero                2*1,3
+    3 Btot                 2*2,2*4,2*6
+    4 Bzero                2*2,4
+end groups

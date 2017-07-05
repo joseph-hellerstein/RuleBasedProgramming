@@ -1,0 +1,22 @@
+# Created by BioNetGen 2.2.6-stable
+begin parameters
+    1 _rateLaw1  50  # Constant
+    2 _rateLaw2  1  # Constant
+    3 _rateLaw3  1  # Constant
+    4 _rateLaw4  0.5  # Constant
+end parameters
+begin species
+    1 A(b,b,b,c,c,p~P) 2000
+    2 DNA() 1
+    3 A(b,b,b,c,c,p~U) 0
+end species
+begin reactions
+    1 2 1,2 _rateLaw1 #_R1
+    2 1 3 _rateLaw3 #_reverse__R2
+    3 1 0 _rateLaw4 #_R3
+    4 3 1 _rateLaw2 #_R2
+end reactions
+begin groups
+    1 Aphos                1
+    2 Atotal               1,3
+end groups

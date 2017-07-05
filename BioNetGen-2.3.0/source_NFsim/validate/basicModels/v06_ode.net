@@ -1,0 +1,44 @@
+# Created by BioNetGen 2.2.6-stable
+begin parameters
+    1 _rateLaw1  5  # Constant
+    2 _rateLaw2  5  # Constant
+    3 _rateLaw3  10  # Constant
+    4 _rateLaw4  1  # Constant
+    5 _rateLaw5  2  # Constant
+end parameters
+begin species
+    1 Cross(b,b) 500
+    2 B(c,p~U) 2000
+    3 B(c!1,p~U).Cross(b!1,b) 0
+    4 B(c,p~P) 0
+    5 B(c!1,p~U).B(c!2,p~U).Cross(b!2,b!1) 0
+    6 B(c!1,p~P).Cross(b!1,b) 0
+    7 B(c!1,p~P).B(c!2,p~U).Cross(b!2,b!1) 0
+    8 B(c!1,p~P).B(c!2,p~P).Cross(b!2,b!1) 0
+end species
+begin reactions
+    1 1,2 3 2*_rateLaw1 #_R1
+    2 2 4 _rateLaw5 #_R4
+    3 2,3 5 _rateLaw1 #_R1
+    4 1,4 6 2*_rateLaw1 #_R1
+    5 3,4 7 _rateLaw1 #_R1
+    6 3 1,2 _rateLaw2 #_reverse__R1
+    7 3 6 _rateLaw5 #_R4
+    8 2,6 7 _rateLaw1 #_R1
+    9 4,6 8 _rateLaw1 #_R1
+   10 5 2,3 2*_rateLaw2 #_reverse__R1
+   11 6 1,4 _rateLaw2 #_reverse__R1
+   12 7 3,4 _rateLaw2 #_reverse__R1
+   13 7 2,6 _rateLaw2 #_reverse__R1
+   14 5 7 2*_rateLaw3 #_R2
+   15 7 8 _rateLaw4 #_R3
+   16 5 7 2*_rateLaw5 #_R4
+   17 7 8 _rateLaw5 #_R4
+   18 8 4,6 2*_rateLaw2 #_reverse__R1
+end reactions
+begin groups
+    1 Bphos                4,6,7,2*8
+    2 Complex              2*5,2*7,2*8
+    3 ComplexUP            7
+    4 Complex2             2*5,2*7,2*8
+end groups

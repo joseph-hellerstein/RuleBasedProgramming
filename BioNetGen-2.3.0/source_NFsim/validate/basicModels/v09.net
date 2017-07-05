@@ -1,0 +1,27 @@
+# Created by BioNetGen 2.2.6-stable
+begin parameters
+    1 _rateLaw1  0.01  # Constant
+    2 _rateLaw2  0.11  # Constant
+    3 _rateLaw3  0.01  # Constant
+    4 _rateLaw4  0.1  # Constant
+    5 _rateLaw5  1  # Constant
+    6 _rateLaw6  0.4  # Constant
+end parameters
+begin species
+    1 A(a1,a2) 1000
+    2 A(a1!1,a2).A(a1!1,a2) 0
+    3 A(a1!1,a2!2).A(a1!1,a2).A(a1!2,a2) 0
+    4 A(a1!1,a2!2).A(a1!1,a2!3).A(a1!2,a2!3) 0
+end species
+begin reactions
+    1 1,1 2 0.5*_rateLaw1 #_R1
+    2 2 1,1 _rateLaw2 #_reverse__R1
+    3 1,2 3 2*_rateLaw3 #_R2
+    4 3 1,2 _rateLaw4 #_reverse__R2
+    5 3 4 _rateLaw5 #_R3
+    6 4 3 _rateLaw6 #_reverse__R3
+end reactions
+begin groups
+    1 bond                 2*2,3*3,5*4
+    2 ring                 4
+end groups

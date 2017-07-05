@@ -1,0 +1,16 @@
+# Created by BioNetGen 2.2.6-stable
+begin parameters
+    1 _rateLaw1   1  # Constant
+    2 _rateLaw2   0.3  # Constant
+end parameters
+begin species
+    1 A(b,c) 2000
+    2 A(b!1,c!1) 0
+end species
+begin reactions
+    1 1 2 _rateLaw1 #_R1
+    2 2 1 _rateLaw2 #_reverse__R1
+end reactions
+begin groups
+    1 A_withBond           2
+end groups
